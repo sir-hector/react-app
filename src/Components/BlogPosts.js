@@ -2,13 +2,10 @@ import React from 'react'
 import timeago from 'timeago.js'
 import {Link} from "react-router-dom";
 
+
 class BlogPosts extends React.Component {
     render() {
-        const {posts, isFetching} = this.props;
-
-        if(isFetching) {
-            return (<div><i className="fas fa-spinner fa-spin"></i> ładowanie </div>)
-        }
+        const {posts } = this.props;
 
         return (<div>
             <ul>
