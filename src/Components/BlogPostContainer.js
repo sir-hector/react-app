@@ -2,6 +2,8 @@ import React from "react";
 import {blogPostFetch, blogPostUnload} from "../actions/actions";
 import connect from "react-redux/lib/connect/connect";
 import {BlogPost} from "./blogPost";
+import BlogPosts from "./BlogPosts";
+import CommentListContainer from "./CommentListContainer";
 
 const mapStateToProps = state => ({
         ...state.blogPost
@@ -25,7 +27,11 @@ class BlogPostContainer extends React.Component {
     render(){
         const {isFetching,post} = this.props;
         return (
-            <BlogPost isFetching = {isFetching} post={post}/>
+            <div>
+            <BlogPost post={post}/>
+                <CommentListContainer blogPostId={this.props.match.params.id}/>
+            </div>
+
         )
     }
 }

@@ -3,6 +3,7 @@ import BlogPosts from "./BlogPosts";
 import {blogPostListFetch} from "../actions/actions";
 import {connect} from "react-redux";
 import {Spinner} from "./Spinner";
+import CommentListContainer from "./CommentListContainer";
 
 const mapStateToProps = state => ({
         ...state.blogPostList
@@ -25,7 +26,12 @@ class BlogPostsContainer extends React.Component {
             return (<Spinner/>)
         }
 
-        return (<BlogPosts posts={posts} />)
+        return (
+            <div>
+            <BlogPosts posts={posts} />
+
+            </div>
+        )
     }
 }
 
