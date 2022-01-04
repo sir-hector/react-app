@@ -9,9 +9,10 @@ import App from "./Components/App"
 import LoginForm from "./Components/LoginForm"
 import reducer from "./reducer";
 import thunkMiddleware from 'redux-thunk';
+import {tokenMiddleware} from "./middleware";
 
 const store = createStore(
-    reducer, applyMiddleware(thunkMiddleware)
+    reducer, applyMiddleware(thunkMiddleware, tokenMiddleware)
 );
 const history = createHistory();
 

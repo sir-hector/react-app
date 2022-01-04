@@ -1,13 +1,47 @@
 import React from 'react';
+import {Field, reduxForm} from "redux-form";
+import {renderField} from "../form";
+import {connect} from "react-redux";
+import {userLoginAttempt} from "../actions/actions";
+
+const mapDispatchToProps = {
+    userLoginAttempt
+}
+const mapStateToProps = state => ({
+    ...state.auth
+})
+
 
 class LoginForm extends React.Component {
+    componentDidUpdate(prevProps) {
+        if(prevProps.token !== this.props.token) {
+            this.props.history.push('/')
+        }
+    }
+
+    onSubmit(values) {
+        console.log(values)
+        return this.props.userLoginAttempt(
+            values.username,
+            values.password
+        )
+    }
+
     render() {
-        return (
-            <div>
-                Hello from LoginForm
+        const {handleSubmit} = this.props;
+        return(
+            <div className="text-center">
+                <form className="mt-4" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <Field name="username" label="username" type="text" component={renderField}/>
+                    <Field name="password" label="password" type="password" component={renderField}/>
+                    <button type="submit" className="btn btn-primary"> Zaloguj</button>
+                </form>
             </div>
-        );
+
+        )
     }
 }
 
-export default LoginForm;
+export default reduxForm({
+    form: 'LoginForm'
+})(connect(mapStateToProps,mapDispatchToProps)(LoginForm));

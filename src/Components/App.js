@@ -4,9 +4,17 @@ import LoginForm from "./LoginForm"
 import BlogPostsContainer from "./BlogPostsContainer"
 import BlogPostContainer from "./BlogPostContainer"
 import Header from "./Header";
+import {requests} from "../agent";
 
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        const token = window.localStorage.getItem('jwtToken');
+        if(token){
+            requests.setToken(token)
+        }
+    }
     render() {
         return (
             <div>

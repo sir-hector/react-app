@@ -11,7 +11,7 @@ import {
     COMMENT_LIST_ERROR,
     COMMENT_LIST_RECEIVED,
     COMMENT_LIST_REQUEST,
-    COMMENT_LIST_UNLOAD
+    COMMENT_LIST_UNLOAD, USER_LOGIN_SUCCESS
 } from "./constans";
 
 
@@ -89,5 +89,24 @@ export const commentListFetch = (id) => {
         return requests.get(`/blog_posts/${id}/comments`)
             .then(response => dispatch(commentListReceived(response)))
             .catch(error => dispatch(commentListError(error)))
+    }
+}
+
+export const userLoginSuccess = (token, userId) => {
+    return {
+        type: USER_LOGIN_SUCCESS,
+        token,
+        userId,
+    }
+}
+
+export const userLoginAttempt = (username, password) => {
+    return (dispatch) => {
+        return requests.post('/login_check', {username, password}, false).then(
+            response => {dispatch(userLoginSuccess(response.token,response.id))})
+            .catch(error => {
+                console.log('Login failed');
+            }
+        )
     }
 }
