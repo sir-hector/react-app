@@ -7,12 +7,18 @@ import {
     BLOG_POST_LIST_REQUEST,
     BLOG_POST_RECEIVED,
     BLOG_POST_REQUEST,
-    BLOG_POST_UNLOAD,
+    BLOG_POST_UNLOAD, COMMENT_ADDED,
     COMMENT_LIST_ERROR,
     COMMENT_LIST_RECEIVED,
     COMMENT_LIST_REQUEST,
-    COMMENT_LIST_UNLOAD, USER_LOGIN_SUCCESS
+    COMMENT_LIST_UNLOAD,
+    USER_LOGIN_SUCCESS,
+    USER_PROFILE_ERROR,
+    USER_PROFILE_RECEIVED,
+    USER_PROFILE_REQUEST,
+    USER_SET_ID
 } from "./constans";
+import {SubmissionError} from "redux-form";
 
 
 export const blogPostListRequest = () => ({
@@ -91,6 +97,22 @@ export const commentListFetch = (id) => {
             .catch(error => dispatch(commentListError(error)))
     }
 }
+export const commentAdded = (comment) => ({
+    type: COMMENT_ADDED,
+    comment
+});
+export const commentAdd = (comment, blogPostId) => {
+    return (dispatch) => {
+        return requests.post(
+            '/comments',
+            {
+                content: comment,
+                blogPost: `/api/blog_posts/${blogPostId}`
+            }
+        ).then(response => dispatch(commentAdded(response)))
+    }
+}
+
 
 export const userLoginSuccess = (token, userId) => {
     return {
@@ -100,13 +122,48 @@ export const userLoginSuccess = (token, userId) => {
     }
 }
 
+export const userProfileFetch = (userId) => {
+    return (dispatch) => {
+        dispatch(userProfileRequest());
+        return requests.get(`/users/${userId}`, true).then(
+            response => dispatch(userProfileReceived(userId, response))).catch( error => dispatch(userProfileError()))
+    }
+}
+export const userProfileRequest = () => {
+    return  {
+        type: USER_PROFILE_REQUEST
+    }
+}
+export const userProfileError = (error) => {
+    return  {
+        type: USER_PROFILE_ERROR,
+        error
+    }
+}
+export const userProfileReceived = (userId, userData) => {
+    return  {
+        type: USER_PROFILE_RECEIVED,
+        userData,
+        userId,
+    }
+}
+
 export const userLoginAttempt = (username, password) => {
     return (dispatch) => {
         return requests.post('/login_check', {username, password}, false).then(
             response => {dispatch(userLoginSuccess(response.token,response.id))})
             .catch(error => {
-                console.log('Login failed');
+                throw new SubmissionError({
+                    _error: "username or password is invalid"
+                })
             }
         )
+    }
+}
+
+export const userSetId = (userId) => {
+    return {
+        type: USER_SET_ID,
+        userId
     }
 }
