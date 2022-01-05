@@ -2,7 +2,7 @@ import {
     COMMENT_LIST_REQUEST,
     COMMENT_LIST_RECEIVED,
     COMMENT_LIST_ERROR,
-    COMMENT_LIST_UNLOAD
+    COMMENT_LIST_UNLOAD, COMMENT_ADDED
 } from "../actions/constans";
 
 export default ( state = {
@@ -16,10 +16,16 @@ export default ( state = {
                 isFetching: true,
             }
         case COMMENT_LIST_RECEIVED:
+
             return {
                 ...state,
                 commentList: action.data['hydra:member'],
                 isFetching: false
+            }
+        case COMMENT_ADDED:
+            return {
+                ...state,
+                commentList: [action.comment, ...state.commentList]
             }
         case COMMENT_LIST_ERROR:
             return {
@@ -34,6 +40,6 @@ export default ( state = {
                 commentList: null
             }
         default:
-            return null;
+            return state;
     }
 }

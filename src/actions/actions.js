@@ -12,13 +12,14 @@ import {
     COMMENT_LIST_RECEIVED,
     COMMENT_LIST_REQUEST,
     COMMENT_LIST_UNLOAD,
-    USER_LOGIN_SUCCESS,
+    USER_LOGIN_SUCCESS, USER_LOGOUT,
     USER_PROFILE_ERROR,
     USER_PROFILE_RECEIVED,
     USER_PROFILE_REQUEST,
     USER_SET_ID
 } from "./constans";
 import {SubmissionError} from "redux-form";
+import {parseApiErrors} from "../apiUtils";
 
 
 export const blogPostListRequest = () => ({
@@ -109,7 +110,10 @@ export const commentAdd = (comment, blogPostId) => {
                 content: comment,
                 blogPost: `/api/blog_posts/${blogPostId}`
             }
-        ).then(response => dispatch(commentAdded(response)))
+        ).then(response => dispatch(commentAdded(response))).catch(error=>{
+            console.log(error)
+            throw new SubmissionError(parseApiErrors(error))
+        })
     }
 }
 
@@ -158,6 +162,12 @@ export const userLoginAttempt = (username, password) => {
                 })
             }
         )
+    }
+}
+
+export const userLogout = () => {
+    return {
+        type: USER_LOGOUT
     }
 }
 

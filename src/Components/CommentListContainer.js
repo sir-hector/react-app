@@ -2,7 +2,7 @@ import React from "react";
 import {commentListFetch, commentListUnload} from "../actions/actions";
 import connect from "react-redux/lib/connect/connect";
 import {Spinner} from "./Spinner";
-import CommentList from "./CommentList";
+import {CommentList} from "./CommentList";
 import CommentForm from "./CommentForm";
 
 const mapStateToProps = state => ({
