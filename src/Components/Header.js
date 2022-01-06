@@ -20,6 +20,22 @@ export default class Header extends React.Component {
                 <Link to="/" className="navbar-brand">
                     React Blog
                 </Link>
+                <ul className='navbar-nav mr-auto'>
+                    {!isAuthenticated &&
+                    (
+                    <li className='nav-item'>
+                        <Link to='/register' className="nav-link"> Zarejestruj</Link>
+                    </li>
+                    )
+                    }
+                    {isAuthenticated &&
+                    (
+                        <li className='nav-item'>
+                            <Link to='/dodaj-ogloszenie' className="nav-link"> Dodaj ogłoszenie</Link>
+                        </li>
+                    )
+                    }
+                </ul>
                 <span className="navbar-text">
                     {isAuthenticated ?  this.renderUser() : <Link to="/login">Sign in </Link>}
                 </span>

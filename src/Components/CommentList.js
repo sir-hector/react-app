@@ -29,7 +29,7 @@ export class CommentList extends React.Component {
                                     <p className="card-text">
                                         <small className="text-muted">
                                             {timeago().format(comment.published)} by&nbsp;
-                                            {comment.author.name}
+                                            {comment.author.username}
                                         </small>
                                     </p>
                                 </div>

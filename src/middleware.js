@@ -19,8 +19,6 @@ export const tokenMiddleware = store => next => action => {
             if(state.userId === action.userId && state.userData === null){
                 store.dispatch(userLogout());
             }
-        default:
-
     }
 
     next(action)
