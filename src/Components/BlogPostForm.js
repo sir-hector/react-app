@@ -4,32 +4,43 @@ import {connect} from "react-redux";
 import {canWritePost} from "../apiUtils";
 import {Redirect} from "react-router";
 import {renderField} from "../form";
-import {postAdd} from "../actions/actions";
+import {blogPostFormUnload, imageDelete, postAdd} from "../actions/actions";
+import ImageUpload from "./ImageUpload";
+import {ImageBrowser} from "./ImageBrowser";
+
+
 
 const mapDispatchToProps = {
-    postAdd
+    postAdd,
+    blogPostFormUnload,
+    imageDelete
 }
 
 const mapStateToProps = state => ({
-        userData: state.auth.userData
+        userData: state.auth.userData,
+        ...state.blogPostForm
     }
 )
 class BlogPostForm extends React.Component {
 
     onSubmit(values) {
-        const {postAdd, reset, history}= this.props;
-        return postAdd(values.title, values.content)
+        const {postAdd, reset, history, images}= this.props;
+        return postAdd(values.title, values.content, images)
             .then(()=>{
                 reset();
                 history.push('/');
             })
     }
 
+    componentWillUnmount() {
+        this.props.blogPostFormUnload();
+    }
+
     render() {
         if(!canWritePost(this.props.userData)) {
             return <Redirect to={"/login"}/>
         }
-        const {submitting, handleSubmit, error} = this.props
+        const {submitting, handleSubmit, error, images, isImageUploading, imageDelete} = this.props
         return(
             <div className={"card mt-3 mb-6 shadow-sm"}>
                 <div className={"card-body"}>
@@ -37,8 +48,10 @@ class BlogPostForm extends React.Component {
                     <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                         <Field name="title" label="Tytuł" type="text" component={renderField}/>
                         <Field name="content" label="Zawartość" type="textarea" component={renderField}/>
+                        <ImageUpload/>
+                        <ImageBrowser images={images} deleteHandler={imageDelete} isLocked={isImageUploading}/>
 
-                        <button type="submit" className="btn btn-primary btn-big btn-block" disabled={submitting}> Dodaj Ogłoszenie </button>
+                        <button type="submit" className="btn btn-primary btn-big btn-block" disabled={submitting || isImageUploading}> Dodaj Ogłoszenie </button>
                     </form>
 
                 </div>
