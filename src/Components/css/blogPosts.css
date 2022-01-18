@@ -1,0 +1,10 @@
+.card-body {
+    display: flex;
+    justify-content: space-between
+
+
+}
+
+.card-body .right-panel img{
+    height: 200px;
+}

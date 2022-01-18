@@ -15,10 +15,10 @@ export class Paginator extends React.Component {
         const {currentPage, setPage, previousPage, nextPage} = this.props;
         return (
             <nav>
-                <ul className="pagination">
+                <ul className="pagination justify-content-center">
                     <li className="page-item">
                         <button className="page-link" onClick={previousPage}>
-                            Previous
+                            Poprzedni
                         </button>
                     </li>
                     {
@@ -38,7 +38,7 @@ export class Paginator extends React.Component {
                     }
                     <li className="page-item">
                         <button className="page-link" onClick={nextPage}>
-                            Next
+                            Następny
                         </button>
                     </li>
                 </ul>

@@ -27,7 +27,7 @@ class BlogPostContainer extends React.Component {
     render(){
         const {isFetching,post} = this.props;
         return (
-            <div>
+            <div className="container">
             <BlogPost post={post}/>
                 <CommentListContainer blogPostId={this.props.match.params.id}/>
             </div>

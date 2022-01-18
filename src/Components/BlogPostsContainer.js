@@ -61,7 +61,7 @@ class BlogPostsContainer extends React.Component {
         }
 
         return (
-            <div>
+            <div className="container">
             <BlogPosts posts={posts} />
                 <Paginator currentPage={currentPage} pageCount={pageCount} setPage={this.changePage.bind(this)}
                            nextPage = {this.onNextPageClick.bind(this)}

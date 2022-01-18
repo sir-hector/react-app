@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux'
-import './ImageUpload.css'
+import './css/ImageUpload.css'
 import {imageUpload} from "../actions/actions";
 
 const mapDispatchToProps = {

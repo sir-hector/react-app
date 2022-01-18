@@ -31,7 +31,7 @@ class RegisterForm extends React.Component {
     render() {
         const {handleSubmit, submitting} = this.props
         return (
-            <div className={'card mt-3 mb-6 shadow-sm'}>
+            <div className={'card mt-3 mb-6 shadow-sm container'}>
                     <div className={"card-body"}>
                         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                             <Field name={"username"} label={'Nazwa użytkownika'} type={"text"} component={renderField}/>

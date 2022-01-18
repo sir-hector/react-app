@@ -1,17 +1,20 @@
 import React from 'react'
 import timeago from 'timeago.js'
 import {Link} from "react-router-dom";
-
+import {BlogPost} from "./blogPost";
+import './css/blogPosts.css'
 
 class BlogPosts extends React.Component {
     render() {
-        const {posts } = this.props;
-
+        const {posts} = this.props;
+        console.log(posts)
         return (<div>
             <ul>
                 {posts && posts.map (post => (
+
                     <div className="card mb-3 mt-3 shadow-sm" key={post.id}>
                         <div className="card-body">
+                            <div className={"left-panel"}>
                             <h3>
                             <Link to={`/blog-posts/${post.id}`}>{post.title}</Link>
                         </h3>
@@ -21,6 +24,12 @@ class BlogPosts extends React.Component {
                             </small>
                         </p>
                             </div>
+                            <div className={"right-panel"}>
+                            <img src={`http://localhost:8080${post.images[0].url}`}
+                                 className="img-fluid"/>
+                            </div>
+                        </div>
+
                     </div>
                 ))}
             </ul>
@@ -29,3 +38,4 @@ class BlogPosts extends React.Component {
 }
 
 export default BlogPosts
+

@@ -18,7 +18,7 @@ const mapDispatchToProps = {
         this.state = {counter: 10};
     }
     componentDidUpdate(prevProps,prevState) {
-        const {confirmationSuccess, history} = this.props
+        const {confirmationSuccess, history, userRegisterComplete} = this.props
         if(prevProps.confirmationToken !== confirmationSuccess && confirmationSuccess) {
             this.timer = setInterval(
                 () => {
@@ -33,7 +33,7 @@ const mapDispatchToProps = {
     }
 
      componentWillUnmount() {
-        this.props.userRegisterComplete();
+        userRegisterComplete();
         if(this.timer){
             clearInterval(this.timer)
         }

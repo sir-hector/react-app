@@ -3,7 +3,7 @@ import {Message} from "./Message";
 import timeago from 'timeago.js';
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 
-import "./commentList.css"
+import "./css/commentList.css"
 
 
 export class CommentList extends React.Component {
@@ -12,7 +12,7 @@ export class CommentList extends React.Component {
 
 
         if(commentList === null || 0 === commentList.length) {
-            return (<Message message= "No comments yet"/>)
+            return (<Message message= "Brak komentarzy"/>)
         }
 
 
@@ -28,7 +28,7 @@ export class CommentList extends React.Component {
                                     </p>
                                     <p className="card-text">
                                         <small className="text-muted">
-                                            {timeago().format(comment.published)} by&nbsp;
+                                            {timeago().format(comment.published)} przez&nbsp;
                                             {comment.author.username}
                                         </small>
                                     </p>

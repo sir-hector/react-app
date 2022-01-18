@@ -42,7 +42,7 @@ class BlogPostForm extends React.Component {
         }
         const {submitting, handleSubmit, error, images, isImageUploading, imageDelete} = this.props
         return(
-            <div className={"card mt-3 mb-6 shadow-sm"}>
+            <div className={"card mt-3 mb-6 shadow-sm container"}>
                 <div className={"card-body"}>
                     {error && <div className={"alert alert-danger"}>{error}</div>}
                     <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
