@@ -9,6 +9,7 @@ import connect from "react-redux/lib/connect/connect";
 import {userLogout, userProfileFetch, userSetId} from "../actions/actions";
 import RegistrationContainer from "./RegistrationContainer";
 import BlogPostForm from "./BlogPostForm";
+import Footer from "./Footer";
 
 const mapStateToProps = state => ({
   ...state.auth
@@ -57,6 +58,7 @@ class App extends React.Component {
                 <Route path="/:page?" component={BlogPostsContainer}/>
                 <Route path="/" component={BlogPostsContainer}/>
             </Switch>
+                <Footer/>
             </div>
         );
     }
