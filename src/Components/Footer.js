@@ -28,11 +28,14 @@ class Footer extends React.Component {
                 <div className='footer-links'>
                     <div className='footer-link-wrapper'>
                         <div className='footer-link-items'>
-                            <h2> O nas </h2>
-
+                            <button className={"btn-primary rounded"}>
+                                <h2 className={"pt-2"}>O nas</h2>
+                            </button>
                         </div>
                         <div className='footer-link-items'>
-                            <h2>Kontakt</h2>
+                            <button className={"btn-primary rounded"}>
+                                <h2 className={"pt-2"}>Kontakt</h2>
+                            </button>
                         </div>
                     </div>
                 </div>
