@@ -31,8 +31,8 @@ class RegisterForm extends React.Component {
     render() {
         const {handleSubmit, submitting} = this.props
         return (
-            <div className={'card mt-3 mb-6 shadow-sm container'}>
-                    <div className={"card-body"}>
+            <div className={'card mt-3 mb-6 shadow-sm container col-xs-12 col-md-6 col-lg-3'}>
+                    <div className={"card-body justify-content-center"}>
                         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                             <Field name={"username"} label={'Nazwa użytkownika'} type={"text"} component={renderField}/>
                             <Field name={"password"} label={'Hasło'} type={"password"} component={renderField}/>
@@ -46,7 +46,7 @@ class RegisterForm extends React.Component {
                                 />
                                 <label className={"form-check-label"} > Akceptuję regulamin</label>
                             </div>
-                            <button type={'submit'} className={"btn btn-primary btn-big btn-block"} disabled={submitting || !this.state.termsAccepted}> Zarejestruj</button>
+                            <button type={'submit'} className={"btn btn-primary btn-block rounded-pill"} disabled={submitting || !this.state.termsAccepted}> Zarejestruj</button>
                         </form>
                     </div>
 

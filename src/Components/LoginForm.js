@@ -31,12 +31,12 @@ class LoginForm extends React.Component {
         const {handleSubmit,error} = this.props;
 
         return(
-            <div className="text-center container">
+            <div className="text-center container col-xs-12 col-md-6 col-lg-3">
                 {error && <div className="alert alert-danger">Username or Password is invalid</div>}
                 <form className="mt-4" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                     <Field name="username" label="Nazwa użytkownika" type="text" component={renderField}/>
                     <Field name="password" label="Hasło" type="password" component={renderField}/>
-                    <button type="submit" className="btn btn-primary"> Zaloguj</button>
+                    <button type="submit" className="btn btn-primary btn-block rounded-pill"> Zaloguj</button>
                 </form>
             </div>
 
