@@ -13,7 +13,7 @@ class BlogPosts extends React.Component {
                 {posts && posts.map (post => (
 
                     <div className="card mb-3 mt-3 shadow-sm" key={post.id}>
-                        <div className="card-body">
+                        <div className="card-body card-body-list">
                             <div className={"left-panel"}>
                             <h3>
                             <Link to={`/blog-posts/${post.id}`}>{post.title}</Link>
